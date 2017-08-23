@@ -26,7 +26,6 @@ function commands(input){
 	        break;
 	    case "park":
         	var len = parkingArr.length;
-        	console.log(totalParkings,parkingArr.length + 1);
 	        if(totalParkings >= (parkingArr.length + 1)){
 		  		var inp = input.split(" ")[1] + ":" + input.split(" ")[2];
 		  		var obj = {};
@@ -103,7 +102,7 @@ function commands(input){
 		    	var ele;
 		        for(var i=0; i< parkingArr.length; i++){
 		        	if(parkingArr[i][i] && parkingArr[i][i].split(":")[0] == input.split(" ")[1]){
-		        		ele = i++;
+		        		ele = i + 1;
 		        	}else{
 		        		ele = "Not found";
 		        	}
