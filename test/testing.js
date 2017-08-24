@@ -1,16 +1,14 @@
 /* global describe, it, before */
 
-var app = require('../server');
+var server = require('../server.js');
 var assert = require('chai').assert;
-var request = require('supertest');
 
-describe("Parking", function () {
-    this.timeout(30000);
+describe('server', function () {
+  before(function () {
+    server.listen(8080);
+  });
 
-    describe('sh parking_lot.sh', function() {
-
-	    
-
-	});
-
+  after(function () {
+    server.close();
+  });
 });

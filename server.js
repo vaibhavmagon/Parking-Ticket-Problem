@@ -10,6 +10,8 @@ var parkingArr = new Array();
 
 var cmnds = ["create_parking_lot <value>","park <regNumber> <color>","leave <value>","status","registration_numbers_for_cars_with_colour <color>","slot_numbers_for_cars_with_colour <color>","slot_number_for_registration_number <regNumber>"];
 
+console.log(elements);
+
 if(elements[elements.length - 1] == 'true'){
 	interact();
 }else{
@@ -29,7 +31,6 @@ function interact(){
 		});
 	}
 }
-
 
 function commands(input){
 	var n = input.split(" ")[0];
@@ -99,5 +100,7 @@ function commands(input){
 	interact();
 }
 
-http.createServer().listen(8080);
-
+http.createServer(function (req, res) {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('Hello, world!\n');
+});

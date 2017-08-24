@@ -48,7 +48,7 @@ module.exports = {
         	}
         	return arr;
 		}else{
-			return null;
+			return [];
 		}
     },
     registration_numbers_for_cars_with_colour : function(totalParkings, parkingArr, input){
