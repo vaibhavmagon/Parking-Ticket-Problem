@@ -10,8 +10,6 @@ var parkingArr = new Array();
 
 var cmnds = ["create_parking_lot <value>","park <regNumber> <color>","leave <value>","status","registration_numbers_for_cars_with_colour <color>","slot_numbers_for_cars_with_colour <color>","slot_number_for_registration_number <regNumber>"];
 
-console.log(elements);
-
 if(elements[elements.length - 1] == 'true'){
 	interact();
 }else{
@@ -37,6 +35,11 @@ function commands(input){
 	switch (n) {
 	    case "create_parking_lot":
 	        totalParkings = utils.create_parking_lot(input);
+	        for(var i=0; i < totalParkings; i++){
+	        	var obj = new Object();
+	        	obj[parseInt(i)] = null;
+	        	parkingArr.push(obj);
+	        }
 	        console.log("Created a parking lot with " + totalParkings  + " slots.");
 	        break;
 	    case "park":

@@ -4,22 +4,19 @@ module.exports = {
         return totalParkings;
     },
     park : function(totalParkings, parkingArr, len, input){
-    	if(totalParkings >= (parkingArr.length + 1)){
-	  		var inp = input.split(" ")[1] + ":" + input.split(" ")[2];
-	  		var obj = {};
-	  		obj[parseInt(len)] = inp;
-	  		parkingArr.push(obj);
-	  		len = len + 1;
-	  		return len;
-	  	}else if(findParking(parkingArr) == true){
-	  		for(var i=0;i<len;i++){
-	  			if(parkingArr[i][i] == null){
-	  				var inp = input.split(" ")[1] + ":" + input.split(" ")[2];
-					parkingArr[i][i] = inp;
-					i = i + 1;
-					return i;
-	  			}
-	  		}
+    	if(totalParkings > 0){
+	    	if(findParking(parkingArr) == true){
+		  		for(var i=0;i<len;i++){
+		  			if(parkingArr[i][i] == null){
+		  				var inp = input.split(" ")[1] + ":" + input.split(" ")[2];
+						parkingArr[i][i] = inp;
+						i = i + 1;
+						return i;
+		  			}
+		  		}
+		  	}else{
+		  		return null;
+		  	}
 	  	}else{
 	  		return null;
 	  	}
@@ -96,7 +93,7 @@ module.exports = {
 
 function findParking(parkingArr){
 	var ele = false;
-	for(var i=0;i<parkingArr.length;i++){
+	for(var i=0; i<parkingArr.length; i++){
 		if(parkingArr[i][i] == null){
 			ele = true;
 		}
