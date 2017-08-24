@@ -91,14 +91,6 @@ function commands(input){
         		console.log("Sorry, parking lot is full");
         	}
 	        break;
-        default:
-        	console.log("\n");
-        	console.log("*** Wrong Command. List of commands are below: ***");
-        	for(var i=0;i<cmnds.length;i++){
-        		console.log(i+1 + ". " + cmnds[i]);
-        	}
-        	console.log("\n");
-        	break;
 	}
 	interact();
 }
