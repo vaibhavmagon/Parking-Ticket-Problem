@@ -1,116 +1,91 @@
 var http = require('http');
 var fs = require('fs');
 var elements = process.argv;
+var rl = require("readline");
+
+var utils = require('./config/utils.js');
 
 var totalParkings = 0;
 var parkingArr = new Array();
 
 var cmnds = ["create_parking_lot <value>","park <regNumber> <color>","leave <value>","status","registration_numbers_for_cars_with_colour <color>","slot_numbers_for_cars_with_colour <color>","slot_number_for_registration_number <regNumber>"];
 
+if(elements[elements.length - 1] == 'true'){
+	interact();
+}else{
+	fs.readFile(elements[2], 'utf-8', function(err, data) {
+	    var arr = data.split("\n");
+	   	for(var i=0; i < arr.length; i++){
+			commands(arr[i]);
+	   	}
+	});
+}
 
-fs.readFile(elements[2], 'utf-8', function(err, data) {
-    var arr = data.split("\n");
-   	for(var i=0; i < arr.length; i++){
-		commands(arr[i]);
-   	}	
-});
+function interact(){
+	if(elements[elements.length - 1] == 'true'){
+		var prompts = rl.createInterface({ input: process.stdin, output: process.stdout, terminal: false });
+		prompts.question("Input: ", function (data) {
+		    commands(data);
+		});
+	}
+}
 
 
 function commands(input){
 	var n = input.split(" ")[0];
-	console.log(input);
 	switch (n) {
 	    case "create_parking_lot":
-	        totalParkings = parseInt(input.split(" ")[1]);
+	        totalParkings = utils.create_parking_lot(input);
 	        console.log("Created a parking lot with " + totalParkings  + " slots.");
 	        break;
 	    case "park":
         	var len = parkingArr.length;
-	        if(totalParkings >= (parkingArr.length + 1)){
-		  		var inp = input.split(" ")[1] + ":" + input.split(" ")[2];
-		  		var obj = {};
-		  		obj[parseInt(len)] = inp;
-		  		parkingArr.push(obj);
-		  		len = len + 1;
-		  		console.log("Allocated slot number: " + len);
-		  	}else if(findParking(parkingArr) == true){
-		  		for(var i=0;i<len;i++){
-		  			if(parkingArr[i][i] == null){
-		  				var inp = input.split(" ")[1] + ":" + input.split(" ")[2];
-						parkingArr[i][i] = inp;
-						i = i + 1;
-						console.log("Allocated slot number: " + i);
-		  			}
-		  		}
-		  	}else{
-		  		console.log("Sorry, parking lot is full");
-		  	}
+        	var slotNumber = utils.park(totalParkings, parkingArr, len, input);
+        	if(slotNumber){
+        		console.log("Allocated slot number: " + slotNumber);
+        	}else{
+        		console.log("Sorry, parking lot is full");
+        	}
 	        break;
 	    case "leave":
-	    	if(totalParkings > 0){
-		    	var index = input.split(" ")[1] - 1;
-			    if (index > -1 && index <= parkingArr.length) {
-				    parkingArr[index][index] = null;
-				    index = index + 1;
-				    console.log("Slot number " + index + " is free.");
-				}
-			}else{
-				console.log("Sorry, no parking lot created.");
-			}
+	    	var slotNumber = utils.leave(totalParkings, parkingArr, input);
+        	if(slotNumber){
+        		console.log("Slot number " + slotNumber + " is free.");
+        	}else{
+        		console.log("Sorry, parking lot is full");
+        	}
 			break;
 	    case "status":
-	    	if(totalParkings > 0){
-	        	console.log("Slot No. "," Registration No. "," Color ");
-	        	for(var i=0; i<parkingArr.length;i++){
-	        		if(parkingArr[i][i] != null){
-	        			var e = i + 1;
-	        			console.log(e + " " + parkingArr[i][i].split(":")[0] + " " + parkingArr[i][i].split(":")[1])
-	        		}
-	        	}
-    		}else{
-    			console.log("Sorry, no parking lot created.");
-    		}
+	    	var values = utils.status(totalParkings, parkingArr);
+        	if(values.length > 1){
+        		console.log(values.join("\n"));
+        	}else{
+        		console.log("Sorry, parking lot is full");
+        	}
 	        break;
 	    case "registration_numbers_for_cars_with_colour":
-	    	if(totalParkings > 0){
-		        var displayArr = new Array();
-		        for(var i=0; i< parkingArr.length; i++){
-		        	if(parkingArr[i][i] && parkingArr[i][i].split(":")[1] == input.split(" ")[1]){
-		        		displayArr.push(parkingArr[i][i].split(":")[0]);
-		        	}
-		        }
-        		console.log(displayArr.join());
-    		}else{
-    			console.log("Sorry, no parking lot created.");
-    		}
+	    	var regNum = utils.registration_numbers_for_cars_with_colour(totalParkings, parkingArr, input);
+        	if(regNum){
+        		console.log(regNum);
+        	}else{
+        		console.log("Sorry, parking lot is full");
+        	}
 	        break;
 	    case "slot_numbers_for_cars_with_colour":
-	    	if(totalParkings > 0){
-		    	var displayArr = new Array();
-		        for(var i=0; i< parkingArr.length; i++){
-		        	if(parkingArr[i][i] && parkingArr[i][i].split(":")[1] == input.split(" ")[1]){
-		        		displayArr.push(i+1);
-		        	}
-		        }
-	        	console.log(displayArr.join());
-	        }else{
-    			console.log("Sorry, no parking lot created.");
-    		}
+	    	var slotNumber = utils.slot_numbers_for_cars_with_colour(totalParkings, parkingArr, input);
+        	if(slotNumber){
+        		console.log(slotNumber);
+        	}else{
+        		console.log("Sorry, parking lot is full");
+        	}
 	        break;
 	    case "slot_number_for_registration_number":
-	    	if(totalParkings > 0){
-		    	var ele;
-		        for(var i=0; i< parkingArr.length; i++){
-		        	if(parkingArr[i][i] && parkingArr[i][i].split(":")[0] == input.split(" ")[1]){
-		        		ele = i + 1;
-		        	}else{
-		        		ele = "Not found";
-		        	}
-		        }
-	        	console.log(ele);
-	        }else{
-    			console.log("Sorry, no parking lot created.");
-    		}
+	    	var slotNumber = utils.slot_number_for_registration_number(totalParkings, parkingArr, input);
+        	if(slotNumber){
+        		console.log(slotNumber);
+        	}else{
+        		console.log("Sorry, parking lot is full");
+        	}
 	        break;
         default:
         	console.log("\n");
@@ -118,18 +93,10 @@ function commands(input){
         	for(var i=0;i<cmnds.length;i++){
         		console.log(i+1 + ". " + cmnds[i]);
         	}
+        	console.log("\n");
         	break;
 	}
-}
-
-function findParking(parkingArr){
-	var ele = false;
-	for(var i=0;i<parkingArr.length;i++){
-		if(parkingArr[i][i] == null){
-			ele = true;
-		}
-	}
-	return ele;
+	interact();
 }
 
 http.createServer().listen(8080);

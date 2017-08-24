@@ -2,16 +2,15 @@
 
 var app = require('../server');
 var assert = require('chai').assert;
+var request = require('supertest');
 
 describe("Parking", function () {
     this.timeout(30000);
 
-    describe('Create Parking', function () {
-        it('should create a parking lot', function (done) {
-            
+    describe('sh parking_lot.sh', function() {
 
-            
-        });
-    });
+	    
+
+	});
 
 });
