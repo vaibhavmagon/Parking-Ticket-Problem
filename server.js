@@ -114,7 +114,7 @@ function commands(input){
 	        break;
         default:
         	console.log("\n");
-        	console.log("*** Wrong Command. List of commands is as below: ***");
+        	console.log("*** Wrong Command. List of commands are below: ***");
         	for(var i=0;i<cmnds.length;i++){
         		console.log(i+1 + ". " + cmnds[i]);
         	}

@@ -7,10 +7,10 @@ then
 	name=$(cut -d' ' -f1 <<< "$answer")
 	if [[ ${arr[*]} =~ $name ]];
 	then
-		node gojekTask.js answer
+		node server.js answer
 	else
 		echo "Wrong command. Try again!"
 	fi
 else
-	node gojekTask.js $1
+	node server.js $1
 fi

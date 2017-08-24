@@ -1,0 +1,21 @@
+{
+  "name": "parking-ticketing-problem",
+  "version": "1.0.0",
+  "description": "parking-ticketing-problem",
+  "main": "gojekTask.js",
+  "dependencies": {
+    "mocha": "^2.0.1",
+    "chai": "^1.10.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vaibhavmagon/parkingTicketingProblem.git"
+  },
+  "author": "Vaibhav Magon",
+  "license": "ISC",
+  "bugs": {}
+}
