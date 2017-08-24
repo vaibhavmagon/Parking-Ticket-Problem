@@ -20,7 +20,7 @@ describe('server', function () {
 });
 
 describe('File reading test', function() {
-  it('read test input', function(done) {
+  it('Read test input', function(done) {
     fs.readFile('./demo.txt', 'utf-8', function(err, data) {
       if (err) {
         throw "Unable to read file";
@@ -29,6 +29,14 @@ describe('File reading test', function() {
       console.log(commands);
       done();
     });
+  });
+
+  it('Check Commands', function(done) {
+        assert.equal(commands[0].split(" ")[0],"create_parking_lot");
+        assert.equal(commands[1].split(" ")[0],"park");
+        assert.equal(commands[7].split(" ")[0],"leave");
+        assert.equal(commands[8],"status");
+        done();
   });
 });
 
@@ -41,6 +49,7 @@ describe("Testing Functions", function(){
             parkingArr.push(obj);
         }
         assert.equal(totalParkings,6);
+        assert.equal(parkingArr.length,6);
         done();
   });
 
@@ -92,15 +101,17 @@ describe("Testing Functions", function(){
         done();
   });
 
-  it('Allocating Parking to User 7. Reallocationg empty postion 4', function(done) {
+  it('Allocating Parking to User 7. Should Reallocate the nearest empty postion 4', function(done) {
         var ele = utils.park(totalParkings, parkingArr, parkingArr.length, commands[9]);
         assert.equal(ele,4);
+        assert.notEqual(ele,7);
         done();
   });
 
-  it('Allocating Parking to User 8. Parking full.', function(done) {
+  it('Allocating Parking to User 8. Should indicate Parking is full.', function(done) {
         var ele = utils.park(totalParkings, parkingArr, parkingArr.length, commands[10]);
         assert.equal(ele,null);
+        assert.notEqual(ele,8);
         done();
   });
 
@@ -135,11 +146,3 @@ describe("Testing Functions", function(){
   });
 
 });
-
-
-
-
-
-
-
-
