@@ -8,8 +8,6 @@ var utils = require('./config/utils.js');
 var totalParkings = 0;
 var parkingArr = new Array();
 
-var cmnds = ["create_parking_lot <value>","park <regNumber> <color>","leave <value>","status","registration_numbers_for_cars_with_colour <color>","slot_numbers_for_cars_with_colour <color>","slot_number_for_registration_number <regNumber>"];
-
 if(elements[elements.length - 1] == 'true'){
 	interact();
 }else{
