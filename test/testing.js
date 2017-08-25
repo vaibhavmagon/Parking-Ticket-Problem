@@ -26,12 +26,11 @@ describe('File reading test', function() {
         throw "Unable to read file";
       }
       commands = JSON.parse(JSON.stringify(data)).split("\n");
-      console.log(commands);
       done();
     });
   });
 
-  it('Check Commands', function(done) {
+  it('Checking Commands', function(done) {
         assert.equal(commands[0].split(" ")[0],"create_parking_lot");
         assert.equal(commands[1].split(" ")[0],"park");
         assert.equal(commands[7].split(" ")[0],"leave");
@@ -55,7 +54,7 @@ describe("Testing Functions", function(){
 
   it('Allocating Parking to User 1', function(done) {
         var ele = utils.park(totalParkings, parkingArr, parkingArr.length, commands[1]);
-        assert.equal(ele,1);
+        assert.equal(ele, 1, 'these numbers are equal');
         done();
   });
 
