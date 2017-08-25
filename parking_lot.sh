@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 
+parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
 npm install
-npm test
+npm --prefix $parent_path test
 if [ "$#" -ne 1 ]; 
 then
-	node server.js true
+	node $parent_path/server.js true
 else
-	node server.js $1
+	node $parent_path/server.js $1
 fi
