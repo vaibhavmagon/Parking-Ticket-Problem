@@ -4,6 +4,10 @@ var elements = process.argv;
 var rl = require("readline");
 
 var utils = require('./config/utils.js');
+var Config = require('./config/configuration.js');
+var configObj = new Config();
+
+var port = process.env.PORT || configObj.port;
 
 var totalParkings = 0;
 var parkingArr = new Array();
@@ -95,5 +99,5 @@ function commands(input){
 
 http.createServer(function (req, res) {
   res.writeHead(200, { 'Content-Type': 'text/plain' });
-  res.end('Hello, world!\n');
-});
+  res.end('Server is up and running!\n');
+}).listen(port);
