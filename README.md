@@ -15,9 +15,9 @@ marks the slot they were using as being available.
 
 Due to government regulation, the system should provide me with the ability to find out:
 
-● Registration numbers of all cars of a particular colour.
-● Slot number in which a car with a given registration number is parked.
-● Slot numbers of all slots where a car of a particular colour is parked.
+● Registration numbers of all cars of a particular colour.</br/>
+● Slot number in which a car with a given registration number is parked.<br/>
+● Slot numbers of all slots where a car of a particular colour is parked.<br/>
 
 We interact with the system via a simple set of commands which produce a specific
 output. Please take a look at the example below, which includes all the commands you
@@ -27,8 +27,8 @@ Just to clarify, the same codebase should support both modes of input - we don't
 two distinct submissions.
 
 1) It should provide us with an interactive command prompt based shell where
-commands can be typed in
+commands can be typed in. <br/>
 2) It should accept a filename as a parameter at the command prompt and read the
-commands from that file
+commands from that file. <br/>
  
 Instructions to run: ./parking_lot.sh or double click parking_lot(exe file).
