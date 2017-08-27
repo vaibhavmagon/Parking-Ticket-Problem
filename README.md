@@ -15,9 +15,9 @@ marks the slot they were using as being available.
 
 Due to government regulation, the system should provide me with the ability to find out:
 
-● Registration numbers of all cars of a particular colour.</br/>
-● Slot number in which a car with a given registration number is parked.<br/>
-● Slot numbers of all slots where a car of a particular colour is parked.<br/>
+● Registration numbers of all cars of a particular colour. </br/>
+● Slot number in which a car with a given registration number is parked. <br/>
+● Slot numbers of all slots where a car of a particular colour is parked. <br/>
 
 We interact with the system via a simple set of commands which produce a specific
 output. Please take a look at the example below, which includes all the commands you
