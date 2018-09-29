@@ -15,7 +15,7 @@ always park in the slots allocated to them). The customer should be allocated a 
 slot which is nearest to the entry. At the exit the customer returns the ticket which then
 marks the slot they were using as being available.
 
--
+--
 
 ### Due to government regulation, the system should provide me with the ability to find out:
 
@@ -35,7 +35,7 @@ commands can be typed in. <br/>
 2) It should accept a filename as a parameter at the command prompt and read the
 commands from that file. <br/>
  
--
+--
 
 ### Instructions to run: 
 
