@@ -1,4 +1,4 @@
-# Parking Ticket Problem.
+# Parking Ticket Problem
 
 ## Problem Statement
  
@@ -39,7 +39,8 @@ commands from that file. <br/>
 
 ## Instructions to run: 
 
-./parking_lot.sh or double click parking_lot(exe file).
+- ./parking_lot.sh
+- Double click parking_lot(exe file).
 
 <br/>
 
